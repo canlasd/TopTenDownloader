@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btnParse;
     private ListView parseListView;
+    private String mFileContents;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,13 @@ public class MainActivity extends AppCompatActivity {
         btnParse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO add parse activation code
+                ParseApplication parseApplication= new ParseApplication(mFileContents);
+                parseApplication.Process();
+
+                ArrayAdapter<Application> adapter = new ArrayAdapter<Application>(MainActivity.this,
+                        R.layout.list_item,parseApplication.getApplication());
+
+                parseListView.setAdapter(adapter);
             }
         });
         parseListView = (ListView) findViewById(R.id.parseListView);
@@ -45,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
     private class DownloadData extends AsyncTask<String, Void, String> {
 
-        private String mFileContents;
+
 
         @Override
         protected String doInBackground(String... params) {

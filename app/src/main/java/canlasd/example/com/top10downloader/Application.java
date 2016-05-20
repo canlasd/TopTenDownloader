@@ -32,4 +32,13 @@ public class Application {
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
+
+    // used to properly display data on the listview.
+
+    @Override
+    public String toString() {
+        return "Name: " + getName() + "\n" +
+                "Artist: " + getArtist() + "\n"+
+                "Release Date: " + getReleaseDate() + "\n";
+    }
 }
