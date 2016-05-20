@@ -4,7 +4,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ListView;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,14 +21,23 @@ public class MainActivity extends AppCompatActivity {
             "/RSS/topfreeapplications/limit=10/xml";
 
 
-    private TextView xmlTextview;
+    private Button btnParse;
+    private ListView parseListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        xmlTextview = (TextView) findViewById(R.id.xmlTextview);
+        btnParse = (Button) findViewById(R.id.btnParse);
+
+        btnParse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO add parse activation code
+            }
+        });
+        parseListView = (ListView) findViewById(R.id.parseListView);
 
         DownloadData download = new DownloadData();
         download.execute(URL);
@@ -54,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             super.onPostExecute(result);
 
             Log.d("DownloadData", "Result: " + result);
-            xmlTextview.setText(mFileContents);
+
         }
 
         private String downloadXmlFile(String urlFile) {
