@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
             URL = "http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws" +
             "/RSS/topfreeapplications/limit=10/xml";
 
+
     private TextView xmlTextview;
 
     @Override
